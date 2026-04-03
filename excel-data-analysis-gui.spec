@@ -5,7 +5,11 @@ from pathlib import Path
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 
-project_root = Path(__file__).resolve().parent
+spec_file = globals().get("__file__")
+if spec_file:
+    project_root = Path(spec_file).resolve().parent
+else:
+    project_root = Path.cwd().resolve()
 src_root = project_root / "src"
 
 datas = collect_data_files(

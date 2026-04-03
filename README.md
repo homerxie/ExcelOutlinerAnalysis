@@ -120,28 +120,42 @@
 ### 1. 安装
 
 ```bash
-pip3 install -e .
+python -m pip install -e .
 ```
 
 如果你只是先在仓库里直接试跑，还没做安装，也可以使用开发态方式：
 
 ```bash
-PYTHONPATH=src python3 -m excel_data_analysis.cli --help
+PYTHONPATH=src python -m excel_data_analysis.cli --help
 ```
 
 ### 1.1 启动 GUI
 
-安装依赖后可以直接运行：
+macOS / Linux:
 
 ```bash
 source .venv/bin/activate
 excel-data-analysis-gui
 ```
 
+Windows CMD:
+
+```bat
+.venv\Scripts\activate
+excel-data-analysis-gui
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+excel-data-analysis-gui
+```
+
 打包桌面版前可先安装构建依赖：
 
 ```bash
-pip install -e ".[build]"
+python -m pip install -e ".[build]"
 ```
 
 ### 1.2 用 PyInstaller 打包
@@ -171,9 +185,27 @@ pyinstaller excel-data-analysis-cli.spec
 
 如果还没做 editable install，也可以：
 
+macOS / Linux:
+
 ```bash
 source .venv/bin/activate
-PYTHONPATH=src python3 -m excel_data_analysis.gui.app
+PYTHONPATH=src python -m excel_data_analysis.gui.app
+```
+
+Windows CMD:
+
+```bat
+.venv\Scripts\activate
+set PYTHONPATH=src
+python -m excel_data_analysis.gui.app
+```
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+$env:PYTHONPATH = "src"
+python -m excel_data_analysis.gui.app
 ```
 
 ### 1.3 Windows 一键安装
@@ -202,6 +234,24 @@ setup_windows.bat
 ```bat
 .venv\Scripts\python -m pip install -r requirements-build.txt
 ```
+
+也可以直接双击：
+
+```bat
+build_windows.bat
+```
+
+它会自动：
+
+- 检查并创建 `.venv`
+- 安装 `requirements-build.txt`
+- 构建 GUI 包
+- 构建 CLI 包
+
+默认输出在：
+
+- `dist\ExcelDataAnalysis`
+- `dist\excel-data-analysis`
 
 ### 2. 导入数据到本地历史仓库
 

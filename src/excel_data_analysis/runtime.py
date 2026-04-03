@@ -8,6 +8,11 @@ APP_NAME = "ExcelDataAnalysis"
 
 
 def package_root() -> Path:
+    if getattr(sys, "frozen", False):
+        meipass = getattr(sys, "_MEIPASS", None)
+        if meipass:
+            return Path(meipass).resolve() / "excel_data_analysis"
+        return Path(sys.executable).resolve().parent / "excel_data_analysis"
     return Path(__file__).resolve().parent
 
 
