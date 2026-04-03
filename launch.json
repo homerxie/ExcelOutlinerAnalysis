@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug GUI",
+      "type": "python",
+      "request": "launch",
+      "module": "excel_data_analysis.gui.app",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Debug CLI",
+      "type": "python",
+      "request": "launch",
+      "module": "excel_data_analysis.cli",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+      },
+      "args": [
+        "--help"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Debug CLI (generate-report example)",
+      "type": "python",
+      "request": "launch",
+      "module": "excel_data_analysis.cli",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}/src"
+      },
+      "args": [
+        "generate-report",
+        "--template",
+        "examples/chip_reliability_template.json",
+        "--input",
+        "examples/sample_chip_data_real.xlsx",
+        "--output",
+        "examples/sample_chip_data_real_result.xlsx",
+        "--if-exists",
+        "overwrite"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
+}
