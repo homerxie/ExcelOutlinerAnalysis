@@ -1,0 +1,925 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1360</width>
+    <height>860</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Excel Data Analysis</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="headerLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>36</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font-size: 20px; font-weight: 600; padding: 4px 0;</string>
+      </property>
+      <property name="text">
+       <string>Template-Driven Excel/CSV Anomaly Analysis</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="subHeaderLabel">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>44</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>用于快速测试导入、建 golden、异常分析和 Excel 导出。UI 会继续演进，所以这里尽量保持结构清晰、便于后续大改。</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QSplitter" name="mainSplitter">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QWidget" name="leftPanel">
+       <layout class="QVBoxLayout" name="leftPanelLayout">
+        <item>
+         <widget class="QTabWidget" name="workbenchTabWidget">
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="setupTab">
+           <attribute name="title">
+            <string>Setup</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="setupTabLayout">
+            <item>
+             <widget class="QGroupBox" name="pathsGroupBox">
+              <property name="title">
+               <string>1. Paths</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayoutPaths">
+               <item row="0" column="0">
+               <widget class="QLabel" name="storageLabel">
+                 <property name="text">
+                  <string>Database Folder</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="storagePathEdit"/>
+               </item>
+               <item row="0" column="2">
+                <widget class="QPushButton" name="browseStorageButton">
+                 <property name="text">
+                  <string>Browse</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="templateLabel">
+                 <property name="text">
+                  <string>Template File</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QLineEdit" name="templatePathEdit"/>
+               </item>
+               <item row="1" column="2">
+                <widget class="QPushButton" name="browseTemplateButton">
+                 <property name="text">
+                  <string>Browse</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="inputLabel">
+                 <property name="text">
+                  <string>Input Excel/CSV</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLineEdit" name="inputPathEdit"/>
+               </item>
+               <item row="2" column="2">
+                <widget class="QPushButton" name="browseInputButton">
+                 <property name="text">
+                  <string>Browse</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="templateToolsGroupBox">
+              <property name="title">
+               <string>1.5 Template Tools</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayoutTemplateTools">
+               <item row="0" column="0" colspan="3">
+                <widget class="QPushButton" name="validateTemplateButton">
+                 <property name="text">
+                  <string>Validate Template</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="3">
+                <widget class="QPushButton" name="exportTemplateJsonButton">
+                 <property name="text">
+                  <string>Convert Template To JSON</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="3">
+                <widget class="QPushButton" name="exportTemplateExcelButton">
+                 <property name="text">
+                  <string>Convert Template To Excel</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0" colspan="3">
+                <widget class="QPushButton" name="saveDebugBundleButton">
+                 <property name="text">
+                  <string>Save Debug Bundle</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="setupSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="importTab">
+           <attribute name="title">
+            <string>Import</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="importTabLayout">
+            <item>
+             <widget class="QGroupBox" name="importGroupBox">
+              <property name="title">
+               <string>2. Import</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayoutImport">
+               <item>
+                <widget class="QPushButton" name="importButton">
+                 <property name="text">
+                  <string>Import Dataset Into Current Database</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="importHintLabel">
+                 <property name="text">
+                  <string>把当前文件按模板拆成 measurement，并写入当前数据库。若和已有 sample/node/site 等属性冲突，导入前会先询问 Replace 还是 Append。</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="storageOverviewGroupBox">
+              <property name="title">
+               <string>2.5 Current Database Snapshot</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayoutStorageOverview">
+               <item>
+                <widget class="QPushButton" name="refreshStorageViewButton">
+                 <property name="text">
+                  <string>Refresh Current Database View</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="deleteSelectedRowsButton">
+                 <property name="text">
+                  <string>Delete Selected Database Rows</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="storageSummaryLabel">
+                 <property name="text">
+                  <string>No database loaded yet.</string>
+                 </property>
+                 <property name="wordWrap">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTableWidget" name="storageTableWidget">
+                 <property name="editTriggers">
+                  <set>QAbstractItemView::NoEditTriggers</set>
+                 </property>
+                 <property name="alternatingRowColors">
+                  <bool>true</bool>
+                 </property>
+                <property name="selectionBehavior">
+                 <enum>QAbstractItemView::SelectRows</enum>
+                </property>
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::ExtendedSelection</enum>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>true</bool>
+                </property>
+                 <column>
+                  <property name="text">
+                   <string>Current Database Rows</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="importSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="goldenTab">
+           <attribute name="title">
+            <string>Golden</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="goldenTabLayout">
+            <item>
+             <widget class="QGroupBox" name="goldenGroupBox">
+              <property name="title">
+               <string>3. Build Golden Reference</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayoutGolden">
+           <item row="0" column="0">
+            <widget class="QLabel" name="goldenNameLabel">
+             <property name="text">
+              <string>Golden Name</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QLineEdit" name="goldenNameEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="referenceDimsLabel">
+             <property name="text">
+              <string>Reference Dims</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QLineEdit" name="referenceDimsEdit">
+             <property name="placeholderText">
+              <string>sample_id,reliability_node</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="filtersLabel">
+             <property name="text">
+              <string>Filters</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QPlainTextEdit" name="filtersEdit">
+             <property name="placeholderText">
+              <string>一行一个 key=value
+例如:
+reliability_node=T0</string>
+             </property>
+             <property name="maximumHeight">
+              <number>88</number>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="thresholdModeLabel">
+             <property name="text">
+              <string>Threshold Mode</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+           <widget class="QComboBox" name="thresholdModeComboBox">
+             <item>
+              <property name="text">
+               <string>relative</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>sigma</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>hybrid</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="centerMethodLabel">
+             <property name="text">
+              <string>Golden Center</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="centerMethodComboBox">
+             <item>
+              <property name="text">
+               <string>mean</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>median</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="relativeLimitLabel">
+             <property name="text">
+              <string>Relative Limit</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QDoubleSpinBox" name="relativeLimitSpinBox">
+             <property name="decimals">
+              <number>4</number>
+             </property>
+             <property name="maximum">
+              <double>999999999.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.050000000000000</double>
+             </property>
+             <property name="value">
+              <double>0.200000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="sigmaMultiplierLabel">
+             <property name="text">
+              <string>Sigma Multiplier</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QDoubleSpinBox" name="sigmaMultiplierSpinBox">
+             <property name="decimals">
+              <number>4</number>
+             </property>
+             <property name="maximum">
+              <double>999999999.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="value">
+              <double>3.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0" colspan="3">
+            <widget class="QPushButton" name="buildGoldenButton">
+             <property name="text">
+              <string>Build Golden</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="goldenPathLabel">
+             <property name="text">
+              <string>Golden File</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1">
+            <widget class="QLineEdit" name="goldenPathEdit"/>
+           </item>
+           <item row="8" column="2">
+            <widget class="QPushButton" name="browseGoldenButton">
+             <property name="text">
+              <string>Browse</string>
+             </property>
+            </widget>
+           </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="goldenSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="analysisTab">
+           <attribute name="title">
+            <string>Analyze</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="analysisTabLayout">
+            <item>
+             <widget class="QGroupBox" name="analysisGroupBox">
+              <property name="title">
+               <string>4. Analyze And Export</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayoutAnalysis">
+           <item row="0" column="0">
+            <widget class="QLabel" name="goldenSourceLabel">
+             <property name="text">
+              <string>Golden Source</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QComboBox" name="goldenSourceComboBox">
+             <item>
+              <property name="text">
+               <string>template_direct</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>built_golden_file</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="outlierFailModeLabel">
+             <property name="text">
+              <string>Outlier Criteria</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QComboBox" name="outlierFailModeComboBox">
+             <item>
+              <property name="text">
+               <string>modified_z_score</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>golden_deviation</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zscore_and_golden</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>zscore_or_golden</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="zThresholdLabel">
+             <property name="text">
+              <string>Z Threshold</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QDoubleSpinBox" name="zThresholdSpinBox">
+             <property name="decimals">
+              <number>3</number>
+             </property>
+             <property name="minimum">
+              <double>0.001000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>999.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
+              <double>3.500000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="analysisScopeLabel">
+             <property name="text">
+              <string>Analysis Scope</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1" colspan="2">
+            <widget class="QComboBox" name="analysisScopeComboBox">
+             <item>
+              <property name="text">
+               <string>current_input_file</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>entire_database</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>filtered_database</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>checked_imports</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="analysisSampleIdsLabel">
+             <property name="text">
+              <string>Sample IDs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+           <widget class="QLineEdit" name="analysisSampleIdsEdit">
+             <property name="placeholderText">
+              <string>S001,S002</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="analysisExcludeSampleIdsLabel">
+             <property name="text">
+              <string>Exclude Sample IDs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" colspan="2">
+            <widget class="QLineEdit" name="analysisExcludeSampleIdsEdit">
+             <property name="placeholderText">
+              <string>S003,S004</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="analysisNodesLabel">
+             <property name="text">
+              <string>Nodes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1" colspan="2">
+            <widget class="QLineEdit" name="analysisNodesEdit">
+             <property name="placeholderText">
+              <string>T0,T1,T2</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="analysisExcludeNodesLabel">
+             <property name="text">
+              <string>Exclude Nodes</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1" colspan="2">
+            <widget class="QLineEdit" name="analysisExcludeNodesEdit">
+             <property name="placeholderText">
+              <string>T3,T4</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="analysisImportsLabel">
+             <property name="text">
+              <string>Import History</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1" colspan="2">
+            <widget class="QPushButton" name="refreshAnalysisImportsButton">
+             <property name="text">
+              <string>Refresh Import List</string>
+             </property>
+            </widget>
+           </item>
+           <item row="9" column="0" colspan="3">
+            <widget class="QListWidget" name="analysisImportsListWidget">
+             <property name="minimumHeight">
+              <number>110</number>
+             </property>
+             <property name="maximumHeight">
+              <number>160</number>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QLabel" name="outputLabel">
+             <property name="text">
+              <string>Report Output File</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QLineEdit" name="outputPathEdit"/>
+           </item>
+           <item row="10" column="2">
+            <widget class="QPushButton" name="browseOutputButton">
+             <property name="text">
+              <string>Browse</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="0" colspan="3">
+            <widget class="QPushButton" name="runAnalysisButton">
+             <property name="text">
+              <string>Run Analysis And Export Report</string>
+             </property>
+            </widget>
+           </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="analysisSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="rightPanel">
+       <layout class="QVBoxLayout" name="rightPanelLayout">
+        <item>
+         <widget class="QTabWidget" name="resultTabWidget">
+         <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <widget class="QWidget" name="goldenCoverageTab">
+           <attribute name="title">
+            <string>Golden Coverage</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="goldenCoverageTabLayout">
+            <item>
+             <widget class="QLabel" name="goldenCoverageSummaryLabel">
+              <property name="text">
+               <string>No built golden coverage checked yet.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="goldenCoverageSummaryTableWidget">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string>Scope</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="goldenCoverageExamplesLabel">
+              <property name="text">
+               <string>Unmatched Examples</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="goldenCoverageExamplesTableWidget">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string>Row</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="outlinerSummaryTab">
+           <attribute name="title">
+            <string>Outliner Summary</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="outlinerSummaryTabLayout">
+            <item>
+             <widget class="QLabel" name="outlinerSummaryLabel">
+              <property name="text">
+               <string>No outliner summary available yet.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="outlinerSummaryTableWidget">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string>SampleID</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="outlierRatioSummaryLabel">
+              <property name="text">
+               <string>No outlier ratio statistics configured yet.</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableWidget" name="outlierRatioTableWidget">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <column>
+               <property name="text">
+                <string>Stat ID</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="logTab">
+           <attribute name="title">
+            <string>Log</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="logTabLayout">
+            <item>
+             <widget class="QPlainTextEdit" name="logPlainTextEdit">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+ </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1360</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatabase">
+   <property name="title">
+     <string>Database</string>
+    </property>
+    <addaction name="actionSaveDatabase"/>
+    <addaction name="actionSaveDatabaseAs"/>
+   </widget>
+   <addaction name="menuDatabase"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSaveDatabase">
+   <property name="text">
+    <string>Save Database</string>
+   </property>
+  </action>
+  <action name="actionSaveDatabaseAs">
+   <property name="text">
+    <string>Save Database As</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
